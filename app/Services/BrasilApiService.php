@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class BrasilApiService
 {
@@ -45,13 +46,30 @@ class BrasilApiService
             if ($response->successful()) {
                 $data = $response->json();
 
+                // Log da resposta para debug
+                Log::info('BrasilAPI - CNPJ encontrado', [
+                    'cnpj' => $cnpjLimpo,
+                    'razao_social' => $data['razao_social'] ?? null,
+                ]);
+
                 return $this->formatarDadosCnpj($data);
             }
 
             if ($response->status() !== 0) {
+                Log::warning('BrasilAPI - CNPJ não encontrado', [
+                    'cnpj' => $cnpjLimpo,
+                    'status' => $response->status(),
+                    'response' => $response->body(),
+                ]);
                 return null;
             }
         } catch (\Exception $e) {
+            Log::error('BrasilAPI - Erro na consulta', [
+                'cnpj' => $cnpj,
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+            ]);
+
             return null;
         }
 
