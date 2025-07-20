@@ -556,56 +556,9 @@ setup.sh                           # Script de setup automático
 -   Validação de campos obrigatórios
 -   Mensagens de erro personalizadas
 
-## 🐛 Solução de Problemas
-
-### Erro de SSL com BrasilAPI
-
-Consulte a documentação em `docs/BRASILAPI_SSL_FIX.md` para resolver problemas de conexão SSL.
-
-### Problemas de Banco de Dados
-
-```bash
-# Limpar cache de configuração
-php artisan config:clear
-
-# Recriar tabelas
-php artisan migrate:fresh
-
-# Verificar status das migrações
-php artisan migrate:status
-```
-
-### Problemas de Permissão
-
-```bash
-# Dar permissão de escrita ao storage
-chmod -R 775 storage bootstrap/cache
-```
-
 ## 📝 Logs
 
 Os logs da aplicação estão disponíveis em:
 
 -   `storage/logs/laravel.log` - Logs gerais
 -   Logs específicos da BrasilAPI são registrados automaticamente
-
-## 🤝 Contribuição
-
-1. Faça um fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
-
-## 📄 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
-
-## 📞 Suporte
-
-Para dúvidas ou problemas:
-
-1. Verifique a documentação em `docs/`
-2. Consulte os logs em `storage/logs/`
-3. Execute `php artisan brasilapi:test` para testar a conexão
-4. Abra uma issue no repositório
